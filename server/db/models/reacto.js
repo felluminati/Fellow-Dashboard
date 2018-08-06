@@ -12,11 +12,6 @@ const Reacto = db.define('reacto', {
     allowNull: false,
     unique: true
   },
-  fellowAssigned: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
   dateAssigned: {
     type: Sequelize.DATE,
     allowNull: false,
