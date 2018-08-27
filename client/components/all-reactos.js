@@ -10,7 +10,7 @@ class AllReactos extends Component {
   handleClick = (evt) => {
     const cellText = evt.target.innerHTML
     const reactoId = +cellText.split(' ')[1]
-    this.props.history.push(`/single-reacto/${reactoId}`)
+    this.props.history.push(`/reacto/${reactoId}`)
   }
 
   render() {

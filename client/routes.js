@@ -28,8 +28,8 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route path="/single-reacto/:reactoId" component={SingleReacto} />
-        <Route path="/all-reactos" component={AllReactos} />
+        <Route path="/reacto/:reactoId" component={SingleReacto} />
+        <Route path="/reactos" component={AllReactos} />
         <Route component={Login} />
       </Switch>
     )
