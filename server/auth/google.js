@@ -29,23 +29,33 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   const strategy = new GoogleStrategy(
     googleConfig,
-    (token, refreshToken, profile, done) => {
+    async (token, refreshToken, profile, done) => {
       const googleId = profile.id
       const name = profile.displayName
       const email = profile.emails[0].value
-
-      User.findOrCreate({
-        where: {googleId},
-        defaults: {name, email}
-      })
-        .then(([user]) => done(null, user))
-        .catch(done)
+      const googleToken = token
+      const googleRefreshToken = refreshToken
+      try{
+        await User.update({name, googleId, googleToken, googleRefreshToken},{
+          where: {
+            email: email
+          }
+        })
+        const authorizedUser = await User.findOne({
+          where: {
+            email: email
+          }
+        })
+        done(null,authorizedUser)
+      } catch (err) {
+        done(err)
+      }
     }
   )
 
   passport.use(strategy)
 
-  router.get('/', passport.authenticate('google', {scope: 'email'}))
+  router.get('/', passport.authenticate('google', {scope: ['email','https://www.googleapis.com/auth/calendar','https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/plus.login']}))
 
   router.get(
     '/callback',

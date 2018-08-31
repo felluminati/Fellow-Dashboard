@@ -15,7 +15,6 @@ const Reacto = require('./reacto')
  * instead of: const User = require('../db/models/user')
  */
 
-
  /**
   * For each cohort period, a REACTO will only be assigned to one fellow,
   * and a Fellow can have multiple REACTOs assigned to him/her.
