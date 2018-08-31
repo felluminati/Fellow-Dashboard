@@ -5,11 +5,11 @@ const db = require('../db')
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+   // allowNull: false
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+   // allowNull: false
   },
   email: {
     type: Sequelize.STRING,
@@ -33,6 +33,21 @@ const User = db.define('user', {
     }
   },
   googleId: {
+    type: Sequelize.STRING
+  },
+  googleToken: {
+    type: Sequelize.STRING
+  },
+  googleRefreshToken : {
+    type: Sequelize.STRING
+  },
+  githubId: {
+    type: Sequelize.STRING
+  },
+  githubToken: {
+    type: Sequelize.STRING
+  },
+  githubRefreshToken: {
     type: Sequelize.STRING
   }
 })

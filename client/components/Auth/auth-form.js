@@ -40,10 +40,10 @@ const AuthForm = props => {
         <div className="auth-buttons">
           <Button primary type="submit">{displayName}</Button>
           <Divider horizontal>Or</Divider>
-          <a href="/auth/google">
-            <Button color="google plus" type="button" >
-              <Icon name="google" />
-              {displayName} with Google
+          <a href="/auth/github">
+            <Button color="black" type="button" >
+              <Icon name="github" />
+              {displayName} with Github
             </Button>
           </a>
         </div>
@@ -51,6 +51,7 @@ const AuthForm = props => {
     </Segment>
   )
 }
+
 
 /**
  * CONTAINER

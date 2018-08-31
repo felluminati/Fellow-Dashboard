@@ -44,7 +44,9 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  const {id,email, googleId} = req.user
+  res.json({id, email, googleId})
 })
 
 router.use('/google', require('./google'))
+router.use('/github', require('./github'))
