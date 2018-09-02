@@ -20,7 +20,8 @@ class Reacto extends React.Component {
   }
 
   render(){
-      const {reactos, calendar} = this.props
+      const {reactos} = this.props
+      console.log('reactos in this component ', reactos)
       if(!reactos.length){
           return (
             <Dimmer active>
@@ -28,7 +29,49 @@ class Reacto extends React.Component {
             </Dimmer>
           )
       } else {
-        return(
+        return (
+          <Container>
+            <Card.Group>
+            {reactos.map(reacto => {
+              return (
+                <Card fluid color='red' key={reacto.id}>
+                  <Header>{reacto.name}</Header>
+                </Card>
+              )
+            }
+            )}
+            </Card.Group>
+          </Container>
+        )
+      }
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    reactos: state.reactos,
+    calendar: state.calendar,
+    cohort: state.cohort
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getReactosThunk : () => dispatch(getReactosThunk()),
+    getCalendarThunk: () => dispatch(getCalendarThunk()),
+    getCohortsThunk: () => dispatch(getCohortsThunk())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Reacto)
+
+
+
+/**
+ * Samir's Reacto Component
+ *
+ *         return(
           <Container>
             <Card.Group>
             {reactos.map(reacto => {
@@ -58,25 +101,4 @@ class Reacto extends React.Component {
             <button onClick={this.printCohorts}> Test </button>
           </Container>
         )
-      }
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    reactos: state.reactos,
-    calendar: state.calendar,
-    cohort: state.cohort
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getReactosThunk : () => dispatch(getReactosThunk()),
-    getCalendarThunk: () => dispatch(getCalendarThunk()),
-    getCohortsThunk: () => dispatch(getCohortsThunk())
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Reacto)
+ */

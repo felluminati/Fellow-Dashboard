@@ -22,6 +22,30 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const {name, htmlUrl, week, fellow} = req.body
+    await Reacto.update({
+      name,
+      htmlUrl,
+      week
+    }, {
+      where: {
+        id: req.params.id
+      }
+    })
+    const reacto = await Reacto.findById(req.params.id)
+    if(fellow.id) {
+      const fellowToAssign = await Fellow.findById(fellow.id)
+      await reacto.setFellow(fellowToAssign)
+    }
+    console.log('updated reacto successfully')
+    res.json(reacto)
+  } catch(err) {
+    next(err)
+  }
+})
+
 // router.get('/', async (req, res, next) => {
 //   try {
 //     const {data} = await Axios({
