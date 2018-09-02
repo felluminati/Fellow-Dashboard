@@ -1,21 +1,16 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Reacto = db.define('reacto', {
+const Fellow = db.define('fellow', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  htmlUrl: {
+  email: {
     type: Sequelize.STRING,
-    allowNull: false,
     unique: true
-  },
-  week: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
   },
 })
 
-module.exports = Reacto
+module.exports = Fellow

@@ -1,5 +1,7 @@
 const User = require('./user')
 const Reacto = require('./reacto')
+const Calendar = require('./calendar')
+const Fellow = require('./fellow')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,10 +21,14 @@ const Reacto = require('./reacto')
   * For each cohort period, a REACTO will only be assigned to one fellow,
   * and a Fellow can have multiple REACTOs assigned to him/her.
   */
-Reacto.belongsTo(User)
-User.hasMany(Reacto)
+Reacto.belongsTo(Fellow)
+Fellow.hasMany(Reacto)
+
+Reacto.belongsTo(Calendar, {as: 'date_assigned'})
 
 module.exports = {
   User,
-  Reacto
+  Reacto,
+  Calendar,
+  Fellow
 }

@@ -1,21 +1,16 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Reacto = db.define('reacto', {
+const Calendar = db.define('calendar', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  htmlUrl: {
+  startDate: {
     type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  week: {
-    type: Sequelize.INTEGER,
     allowNull: false,
   },
 })
 
-module.exports = Reacto
+module.exports = Calendar

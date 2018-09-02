@@ -1,7 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Calendar, Fellow, Reacto} = require('../server/db/models')
+const { calendarData, fellowData, reactoData} = require('./seed-data');
 
 async function seed() {
   await db.sync({force: true})
@@ -11,8 +12,36 @@ async function seed() {
     User.create({firstName: 'Samir', lastName: 'Thakral', email: 'samir@email.com', password: '123'}),
   ])
 
+  await populateModels()
+
+  await db.sync()
+
+  const calendars = await Calendar.findAll()
+  const fellows = await Fellow.findAll()
+  const reactos = await Reacto.findAll()
+
+  await setReactoFellow(reactos, fellows)
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
+}
+
+async function populateModels() {
+  const calendarP = Calendar.bulkCreate(calendarData)
+  const fellowP = Fellow.bulkCreate(fellowData)
+  const reactoP = Reacto.bulkCreate(reactoData)
+
+  await Promise.all([calendarP, fellowP, reactoP]);
+}
+
+async function setReactoFellow(reactos, fellows) {
+  let fellowId = 1
+  for(let i = 0; i < reactos.length; i++) {
+    if(fellowId >= fellows.length) fellowId = 1
+    const reacto = reactos[i]
+    await reacto.setFellow(fellowId)
+    fellowId += 1
+  }
 }
 
 // We've separated the `seed` function from the `runSeed` function.
