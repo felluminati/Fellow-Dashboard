@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
-import {Dimmer, Loader, Card, Container, Table, Button} from 'semantic-ui-react'
+import {NavLink, Route} from 'react-router-dom'
+import {Dimmer, Loader, Grid, Menu} from 'semantic-ui-react'
 import { getReactosThunk, getCalendarThunk, getCohortsThunk} from '../../store'
+import {ReactoWeek} from '../index'
 import moment from 'moment'
 
 class Reacto extends React.Component {
@@ -21,7 +22,6 @@ class Reacto extends React.Component {
 
   render(){
       const {reactos} = this.props
-      console.log('reactos in this component ', reactos)
       if(!reactos.length){
           return (
             <Dimmer active>
@@ -30,36 +30,33 @@ class Reacto extends React.Component {
           )
       } else {
         return (
-          <Container>
-            <Table celled striped collapsing>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Date</Table.HeaderCell>
-                  <Table.HeaderCell>Reacto Name</Table.HeaderCell>
-                  <Table.HeaderCell>Reacto Gist</Table.HeaderCell>
-                  <Table.HeaderCell>Fellow</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {
-                  reactos.map(reacto => {
-                    const date = reacto.date_assigned.startDate
-                    const name = reacto.name
-                    const html = reacto.htmlUrl
-                    const fellow = reacto.fellow.name
-                    return (
-                      <Table.Row key={reacto.id}>
-                        <Table.Cell>{date}</Table.Cell>
-                        <Table.Cell>{name}</Table.Cell>
-                        <Table.Cell><a href={html} style={{color: "white"}}><Button color="blue">Gist</Button></a></Table.Cell>
-                        <Table.Cell>{fellow}</Table.Cell>
-                      </Table.Row>
-                    )
-                  })
-                }
-              </Table.Body>
-            </Table>
-          </Container>
+          <div id="admin-dashboard">
+            <Grid>
+              <Grid.Column width={4}>
+                <div id="dashboard-menu">
+                  <Menu fluid vertical>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/1">Week One</Menu.Item>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/2">Week Two</Menu.Item>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/3">Week Three</Menu.Item>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/4">Week Four</Menu.Item>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/5">Week Five</Menu.Item>
+                    <Menu.Item as={NavLink} color="blue" to="/reacto/week/6">Week Six</Menu.Item>
+                  </Menu>
+                </div>
+              </Grid.Column>
+              <Grid.Column stretched width={12}>
+                <div id="dashboard-left">
+                  <Route exact path="/reacto/week/1" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/2" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/3" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/4" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/5" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/6" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto" render={() => <h1>Select a week plz</h1>}></Route>
+                </div>
+              </Grid.Column>
+            </Grid>
+          </div>
         )
       }
   }

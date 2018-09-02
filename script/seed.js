@@ -1,8 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Calendar, Fellow, Reacto} = require('../server/db/models')
-const { calendarData, fellowData, reactoData} = require('./seed-data');
+const {User, Calendar, Fellow, Reacto, WeekTopic} = require('../server/db/models')
+const { calendarData, fellowData, reactoData, weekData} = require('./seed-data');
 
 async function seed() {
   await db.sync({force: true})
@@ -19,9 +19,11 @@ async function seed() {
   const calendars = await Calendar.findAll()
   const fellows = await Fellow.findAll()
   const reactos = await Reacto.findAll()
+  const weeks = await WeekTopic.findAll()
 
   await setReactoFellow(reactos, fellows)
   await setReactoCalendar(reactos, calendars)
+  await setReactoWeekTopic(reactos, weeks)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
@@ -31,8 +33,9 @@ async function populateModels() {
   const calendarP = Calendar.bulkCreate(calendarData)
   const fellowP = Fellow.bulkCreate(fellowData)
   const reactoP = Reacto.bulkCreate(reactoData)
+  const weekP = WeekTopic.bulkCreate(weekData)
 
-  await Promise.all([calendarP, fellowP, reactoP]);
+  await Promise.all([calendarP, fellowP, reactoP, weekP]);
 }
 
 async function setReactoFellow(reactos, fellows) {
@@ -52,6 +55,18 @@ async function setReactoCalendar(reactos, calendars) {
       const event = calendars[j]
       if(reacto.name === event.name) {
         await reacto.setDate_assigned(event)
+      }
+    }
+  }
+}
+
+async function setReactoWeekTopic(reactos, weeks) {
+  for(let i = 0; i < reactos.length; i++) {
+    const reacto = reactos[i]
+    for(let j = 0; j < weeks.length; j++) {
+      const week = weeks[j]
+      if(reacto.week === week.num) {
+        await reacto.setWeek_topic(week)
       }
     }
   }

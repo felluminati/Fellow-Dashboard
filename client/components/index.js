@@ -6,4 +6,6 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './Auth/auth-form'
+
 export {default as Reacto} from './Reacto/reacto'
+export {ReactoWeek} from './Reacto/reacto-week'

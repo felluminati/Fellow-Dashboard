@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Reacto, Fellow, Calendar} = require('../db/models')
+const {User, Reacto, Fellow, Calendar, WeekTopic} = require('../db/models')
 const rp = require('request-promise')
 const Axios = require('axios')
 module.exports = router
@@ -13,6 +13,10 @@ router.get('/', async (req, res, next) => {
         }, {
           model: Calendar,
           as: 'date_assigned'
+        },
+        {
+          model: WeekTopic,
+          as: 'week_topic'
         }
       ]
     })

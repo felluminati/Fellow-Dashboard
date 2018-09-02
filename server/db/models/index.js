@@ -2,6 +2,7 @@ const User = require('./user')
 const Reacto = require('./reacto')
 const Calendar = require('./calendar')
 const Fellow = require('./fellow')
+const WeekTopic = require('./week-topic')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -25,10 +26,12 @@ Reacto.belongsTo(Fellow)
 Fellow.hasMany(Reacto)
 
 Reacto.belongsTo(Calendar, {as: 'date_assigned'})
+Reacto.belongsTo(WeekTopic, {as: 'week_topic'})
 
 module.exports = {
   User,
   Reacto,
   Calendar,
-  Fellow
+  Fellow,
+  WeekTopic
 }
