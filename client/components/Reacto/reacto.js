@@ -46,12 +46,12 @@ class Reacto extends React.Component {
               </Grid.Column>
               <Grid.Column stretched width={12}>
                 <div id="dashboard-left">
-                  <Route exact path="/reacto/week/1" render={()=><ReactoWeek reactos={reactos} />}></Route>
-                  <Route exact path="/reacto/week/2" render={()=><ReactoWeek reactos={reactos} />}></Route>
-                  <Route exact path="/reacto/week/3" render={()=><ReactoWeek reactos={reactos} />}></Route>
-                  <Route exact path="/reacto/week/4" render={()=><ReactoWeek reactos={reactos} />}></Route>
-                  <Route exact path="/reacto/week/5" render={()=><ReactoWeek reactos={reactos} />}></Route>
-                  <Route exact path="/reacto/week/6" render={()=><ReactoWeek reactos={reactos} />}></Route>
+                  <Route exact path="/reacto/week/1" render={()=><ReactoWeek reactos={reactos} week={1} />}></Route>
+                  <Route exact path="/reacto/week/2" render={()=><ReactoWeek reactos={reactos} week={2} />}></Route>
+                  <Route exact path="/reacto/week/3" render={()=><ReactoWeek reactos={reactos} week={3} />}></Route>
+                  <Route exact path="/reacto/week/4" render={()=><ReactoWeek reactos={reactos} week={4} />}></Route>
+                  <Route exact path="/reacto/week/5" render={()=><ReactoWeek reactos={reactos} week={5} />}></Route>
+                  <Route exact path="/reacto/week/6" render={()=><ReactoWeek reactos={reactos} week={6} />}></Route>
                   <Route exact path="/reacto" render={() => <h1>Select a week plz</h1>}></Route>
                 </div>
               </Grid.Column>

@@ -1,18 +1,23 @@
 import React from 'react'
-import {Container, Table, Button} from 'semantic-ui-react'
+import {Container, Table, Button, Dropdown} from 'semantic-ui-react'
 
-function filterReacto(reactos) {
-  const week = window.location.pathname.split('/')[3]
-  return reactos.filter(reacto => reacto.week === +week)
-}
-
-export const ReactoWeek = (props) => {
-  const reactos = filterReacto(props.reactos)
-  const weekNum = reactos[0].week_topic.num
+export const ReactoWeek = ({reactos, week}) => {
+  const weekReactos = reactos.filter(reacto => reacto.week === week)
   const weekTopic = reactos[0].week_topic.name.split('-').slice(1).join(' ').toUpperCase()
+  const fellowOptions = [
+    {
+      text: "Jasmine"
+    },
+    {
+      text: "Samir"
+    },
+    {
+      text: "Mary"
+    }
+  ]
   return (
     <Container>
-      <h1>WEEK {weekNum}: {weekTopic}</h1>
+      <h1>WEEK {week}: {weekTopic}</h1>
       <Table celled striped collapsing>
         <Table.Header>
           <Table.Row>
@@ -20,11 +25,12 @@ export const ReactoWeek = (props) => {
             <Table.HeaderCell>Reacto Name</Table.HeaderCell>
             <Table.HeaderCell>Reacto Gist</Table.HeaderCell>
             <Table.HeaderCell>Fellow</Table.HeaderCell>
+            <Table.HeaderCell>Edit Fellow</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {
-            reactos.map(reacto => {
+            weekReactos.map(reacto => {
               const date = reacto.date_assigned.startDate
               const name = reacto.name
               const html = reacto.htmlUrl
@@ -35,6 +41,7 @@ export const ReactoWeek = (props) => {
                   <Table.Cell>{name}</Table.Cell>
                   <Table.Cell><a href={html} style={{color: "white"}}><Button color="blue">Gist</Button></a></Table.Cell>
                   <Table.Cell>{fellow}</Table.Cell>
+                  <Table.Cell><Dropdown placeholder='Choose Fellow' search selection options={fellowOptions} /></Table.Cell>
                 </Table.Row>
               )
             })
