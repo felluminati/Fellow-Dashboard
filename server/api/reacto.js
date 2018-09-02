@@ -1,23 +1,41 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Reacto, Fellow, Calendar} = require('../db/models')
 const rp = require('request-promise')
 const Axios = require('axios')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const {data} = await Axios({
-      url: 'https://api.github.com/repos/FullstackAcademy/technical-interview-prep/contents/algorithms',
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `token ${req.user.githubToken}`
-      }
+    const reactos = await Reacto.findAll({
+      include: [
+        {
+          model: Fellow
+        }, {
+          model: Calendar,
+          as: 'date_assigned'
+        }
+      ]
     })
-    res.json(data);
-  } catch (err) {
-      next(err)
+    res.json(reactos)
+  } catch(err) {
+    next(err)
   }
 })
+
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const {data} = await Axios({
+//       url: 'https://api.github.com/repos/FullstackAcademy/technical-interview-prep/contents/algorithms',
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': `token ${req.user.githubToken}`
+//       }
+//     })
+//     res.json(data);
+//   } catch (err) {
+//       next(err)
+//   }
+// })
 
 router.get('/calender', async (req,res,next) => {
   try{
