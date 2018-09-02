@@ -21,6 +21,7 @@ async function seed() {
   const reactos = await Reacto.findAll()
 
   await setReactoFellow(reactos, fellows)
+  await setReactoCalendar(reactos, calendars)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
@@ -41,6 +42,18 @@ async function setReactoFellow(reactos, fellows) {
     const reacto = reactos[i]
     await reacto.setFellow(fellowId)
     fellowId += 1
+  }
+}
+
+async function setReactoCalendar(reactos, calendars) {
+  for(let i = 0; i < reactos.length; i++) {
+    const reacto = reactos[i]
+    for(let j = 0; j < calendars.length; j++) {
+      const event = calendars[j]
+      if(reacto.name === event.name) {
+        await reacto.setDate_assigned(event)
+      }
+    }
   }
 }
 
