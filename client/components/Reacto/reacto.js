@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
-import {Dimmer, Loader, Card, Container, Icon, Header} from 'semantic-ui-react'
+import {Dimmer, Loader, Card, Container, Table, Button} from 'semantic-ui-react'
 import { getReactosThunk, getCalendarThunk, getCohortsThunk} from '../../store'
 import moment from 'moment'
 
@@ -31,16 +31,34 @@ class Reacto extends React.Component {
       } else {
         return (
           <Container>
-            <Card.Group>
-            {reactos.map(reacto => {
-              return (
-                <Card fluid color='red' key={reacto.id}>
-                  <Header>{reacto.name}</Header>
-                </Card>
-              )
-            }
-            )}
-            </Card.Group>
+            <Table celled striped collapsing>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Date</Table.HeaderCell>
+                  <Table.HeaderCell>Reacto Name</Table.HeaderCell>
+                  <Table.HeaderCell>Reacto Gist</Table.HeaderCell>
+                  <Table.HeaderCell>Fellow</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {
+                  reactos.map(reacto => {
+                    const date = reacto.date_assigned.startDate
+                    const name = reacto.name
+                    const html = reacto.htmlUrl
+                    const fellow = reacto.fellow.name
+                    return (
+                      <Table.Row key={reacto.id}>
+                        <Table.Cell>{date}</Table.Cell>
+                        <Table.Cell>{name}</Table.Cell>
+                        <Table.Cell><a href={html} style={{color: "white"}}><Button color="blue">Gist</Button></a></Table.Cell>
+                        <Table.Cell>{fellow}</Table.Cell>
+                      </Table.Row>
+                    )
+                  })
+                }
+              </Table.Body>
+            </Table>
           </Container>
         )
       }
