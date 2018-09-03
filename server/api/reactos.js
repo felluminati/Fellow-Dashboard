@@ -43,8 +43,25 @@ router.put('/:id', async (req, res, next) => {
       const fellowToAssign = await Fellow.findById(fellow.id)
       await reacto.setFellow(fellowToAssign)
     }
+    const updatedReacto = await Reacto.find({
+      where: {
+        id: req.params.id
+      },
+        include: [
+          {
+            model: Fellow
+          }, {
+            model: Calendar,
+            as: 'date_assigned'
+          },
+          {
+            model: WeekTopic,
+            as: 'week_topic'
+          }
+        ]
+    })
     console.log('updated reacto successfully')
-    res.json(reacto)
+    res.json(updatedReacto)
   } catch(err) {
     next(err)
   }

@@ -8,4 +8,4 @@ export {default as UserHome} from './user-home'
 export {Login, Signup} from './Auth/auth-form'
 
 export {default as Reacto} from './Reacto/reacto'
-export {ReactoWeek} from './Reacto/reacto-week'
+export {default as ReactoWeek} from './Reacto/reacto-week'

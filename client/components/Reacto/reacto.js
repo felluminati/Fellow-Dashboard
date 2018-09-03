@@ -13,7 +13,7 @@ class Reacto extends React.Component {
 
   async componentDidMount() {
     await this.props.getReactosThunk()
-    await this.props.getCalendarThunk()
+    // await this.props.getCalendarThunk()
   //  await this.props.getCohortsThunk()
   // Keeping it commented out. Still need to figure out what can we use from the
   // learndot api
@@ -46,12 +46,12 @@ class Reacto extends React.Component {
               </Grid.Column>
               <Grid.Column stretched width={12}>
                 <div id="dashboard-left">
-                  <Route exact path="/reacto/week/1" render={()=><ReactoWeek reactos={reactos} week={1} />}></Route>
-                  <Route exact path="/reacto/week/2" render={()=><ReactoWeek reactos={reactos} week={2} />}></Route>
-                  <Route exact path="/reacto/week/3" render={()=><ReactoWeek reactos={reactos} week={3} />}></Route>
-                  <Route exact path="/reacto/week/4" render={()=><ReactoWeek reactos={reactos} week={4} />}></Route>
-                  <Route exact path="/reacto/week/5" render={()=><ReactoWeek reactos={reactos} week={5} />}></Route>
-                  <Route exact path="/reacto/week/6" render={()=><ReactoWeek reactos={reactos} week={6} />}></Route>
+                  <Route exact path="/reacto/week/1" render={()=><ReactoWeek week={1} />}></Route>
+                  <Route exact path="/reacto/week/2" render={()=><ReactoWeek week={2} />}></Route>
+                  <Route exact path="/reacto/week/3" render={()=><ReactoWeek week={3} />}></Route>
+                  <Route exact path="/reacto/week/4" render={()=><ReactoWeek week={4} />}></Route>
+                  <Route exact path="/reacto/week/5" render={()=><ReactoWeek week={5} />}></Route>
+                  <Route exact path="/reacto/week/6" render={()=><ReactoWeek week={6} />}></Route>
                   <Route exact path="/reacto" render={() => <h1>Select a week plz</h1>}></Route>
                 </div>
               </Grid.Column>
@@ -66,7 +66,7 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     reactos: state.reactos,
-    calendar: state.calendar,
+    // calendar: state.calendar,
     cohort: state.cohort
   }
 }
@@ -74,7 +74,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getReactosThunk : () => dispatch(getReactosThunk()),
-    getCalendarThunk: () => dispatch(getCalendarThunk()),
+    // getCalendarThunk: () => dispatch(getCalendarThunk()),
     getCohortsThunk: () => dispatch(getCohortsThunk())
   }
 }

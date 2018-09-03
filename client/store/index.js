@@ -6,8 +6,9 @@ import user from './user'
 import reactos from './reacto'
 import calendar from './calendar'
 import cohort from './cohort'
+import fellows from './fellow'
 
-const reducer = combineReducers({user, reactos, calendar, cohort})
+const reducer = combineReducers({user, reactos, calendar, cohort, fellows})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -18,3 +19,4 @@ export * from './user'
 export * from './reacto'
 export * from './calendar'
 export * from './cohort'
+export * from './fellow'
