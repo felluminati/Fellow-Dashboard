@@ -30,7 +30,9 @@ class Reacto extends React.Component {
           )
       } else {
         return (
-          <div id="admin-dashboard">
+          <div id="reacto-dashboard">
+            <h1>Reactos</h1>
+            <br />
             <Grid>
               <Grid.Column width={4}>
                 <div id="dashboard-menu">

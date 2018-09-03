@@ -10,9 +10,7 @@ export const UserHome = props => {
   const {email, googleId} = props
   if(googleId) {
     return(
-     <Link to="/reacto">
-        Go to Reacto
-     </Link>
+      <h1>USER DASHBOARD</h1>
     )
   } else {
       return (

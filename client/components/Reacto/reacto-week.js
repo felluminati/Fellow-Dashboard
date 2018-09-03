@@ -40,7 +40,7 @@ class ReactoWeek extends React.Component {
     })
     return (
       <Container>
-        <h1>WEEK {week}: {weekTopic}</h1>
+        <h2>WEEK {week}: {weekTopic}</h2>
         <Table celled striped collapsing>
           <Table.Header>
             <Table.Row>
@@ -67,7 +67,7 @@ class ReactoWeek extends React.Component {
                     <Table.Cell>{fellow}</Table.Cell>
                     <Table.Cell>
                       <Dropdown
-                        placeholder='Choose Fellow'
+                        placeholder='Assign to another fellow'
                         search selection options={filteredFellows}
                         onChange={(evt) => {
                           evt.reacto = reacto
