@@ -9,3 +9,6 @@ export {Login, Signup} from './Auth/auth-form'
 
 export {default as Reacto} from './Reacto/reacto'
 export {default as ReactoWeek} from './Reacto/reacto-week'
+
+export {default as Workshops} from './workshops'
+export {default as Grading} from './grading'
