@@ -54,7 +54,7 @@ class Reacto extends React.Component {
                   <Route exact path="/reacto/week/4" render={()=><ReactoWeek week={4} />}></Route>
                   <Route exact path="/reacto/week/5" render={()=><ReactoWeek week={5} />}></Route>
                   <Route exact path="/reacto/week/6" render={()=><ReactoWeek week={6} />}></Route>
-                  <Route exact path="/reacto" render={() => <h1>Select a week plz</h1>}></Route>
+                  <Route exact path="/reacto" render={() => <h1>Please select a week</h1>}></Route>
                 </div>
               </Grid.Column>
             </Grid>
