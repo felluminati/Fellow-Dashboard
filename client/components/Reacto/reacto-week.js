@@ -3,41 +3,26 @@ import {Container, Table, Button, Dropdown} from 'semantic-ui-react'
 import { getFellowsThunk, updateReactoThunk, getReactosThunk} from '../../store'
 import { connect } from 'react-redux';
 
-
 class ReactoWeek extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   async componentDidMount() {
     await this.props.getFellows()
     await this.props.getReactos()
   }
 
   handleChange = (evt) => {
-    const chosenFellow = evt.target.innerText
-    const fellowData = this.props.fellows.filter(fellow => fellow.name === chosenFellow)[0]
-    const chosenReacto = evt.reacto
-    const {id, name, htmlUrl, week} = chosenReacto
+    const fellow = this.props.fellows.filter(curFellow => curFellow.name === evt.target.innerText)[0]
+    const {id, name, htmlUrl, week} = evt.reacto
     this.props.updateReacto({
       id,
       name,
       htmlUrl,
       week,
-      fellow: fellowData
+      fellow
     })
   }
 
   render() {
-    const {reactos, week, fellows} = this.props
-    const weekReactos = reactos.filter(reacto => reacto.week === week)
-    const weekTopic = reactos[0].week_topic.name.split('-').slice(1).join(' ').toUpperCase()
-    const fellowOptions = fellows.map(fellow => {
-      return {
-        key: fellow.id,
-        text: fellow.name
-      }
-    })
+    const {reactos, fellowDropdown, weekTopic, week} = this.props
     return (
       <Container>
         <h2>WEEK {week}: {weekTopic}</h2>
@@ -53,12 +38,12 @@ class ReactoWeek extends React.Component {
           </Table.Header>
           <Table.Body>
             {
-              weekReactos.map(reacto => {
+              reactos.map(reacto => {
                 const date = reacto.date_assigned.startDate
                 const name = reacto.name
                 const html = reacto.htmlUrl
                 const fellow = reacto.fellow.name
-                const filteredFellows = fellowOptions.filter(curFellow => curFellow.text !== fellow)
+                const filteredFellows = fellowDropdown.filter(curFellow => curFellow.text !== fellow)
                 return (
                   <Table.Row key={reacto.id}>
                     <Table.Cell>{date}</Table.Cell>
@@ -86,18 +71,30 @@ class ReactoWeek extends React.Component {
   }
 }
 
-const mapStateToProps = ({fellows, reactos}) => {
+const mapStateToProps = (state) => {
+  const week = window.location.pathname.split('/')[3]
+  const reactos = state.reactos.filter(reacto => +reacto.week === +week)
+  const weekTopic = state.reactos[0].week_topic.name.split('-').slice(1).join(' ').toUpperCase()
+  const fellows = state.fellows
+  const fellowDropdown = fellows.map(fellow => {
+    return {
+      key: fellow.id,
+      text: fellow.name
+    }
+  })
   return {
     fellows,
-    reactos
+    fellowDropdown,
+    reactos,
+    weekTopic
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getFellows: () => dispatch(getFellowsThunk()),
-    updateReacto: (reacto) => dispatch(updateReactoThunk(reacto)),
     getReactos : () => dispatch(getReactosThunk()),
+    updateReacto: (reacto) => dispatch(updateReactoThunk(reacto)),
   }
 }
 

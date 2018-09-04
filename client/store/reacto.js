@@ -47,10 +47,9 @@ export default function(state = defaultReactos, action) {
     case GET_REACTOS:
       return action.reactos
     case UPDATE_REACTO:
-      const newState = state.map(reacto => reacto.id === Number(action.reacto.id) ?
+      return state.map(reacto => reacto.id === Number(action.reacto.id) ?
         {...reacto, fellow: action.reacto.fellow, fellowId: action.reacto.fellowId} :
         reacto )
-      return newState
     default:
       return state
   }

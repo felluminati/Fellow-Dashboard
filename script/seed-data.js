@@ -51,7 +51,6 @@ const calendarData = [
 ]
 
 const fellowData = [
-  {name: 'Jasmine Munoz',},
   {name: 'Samir Thakral',},
   {name: 'Mary Warrick',},
   {name: 'Eric Guo',},
