@@ -4,7 +4,7 @@ import {NavLink, Route} from 'react-router-dom'
 import {Dimmer, Loader, Grid, Menu} from 'semantic-ui-react'
 import { getReactosThunk, getCalendarThunk, getCohortsThunk} from '../../store'
 import {ReactoWeek} from '../index'
-import moment from 'moment'
+
 
 class Reacto extends React.Component {
   constructor(){
@@ -13,11 +13,6 @@ class Reacto extends React.Component {
 
   async componentDidMount() {
     await this.props.getReactosThunk()
-    // await this.props.getCalendarThunk()
-  //  await this.props.getCohortsThunk()
-  // Keeping it commented out. Still need to figure out what can we use from the
-  // learndot api
-  //
   }
 
   render(){
@@ -69,7 +64,7 @@ const mapStateToProps = state => {
     user: state.user,
     reactos: state.reactos,
     // calendar: state.calendar,
-    cohort: state.cohort
+    // cohort: state.cohort
   }
 }
 

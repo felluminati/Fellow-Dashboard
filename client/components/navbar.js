@@ -9,13 +9,26 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div id="colorNavBar">
     <nav id="navStyle">
       <Link to="/home">
-        <img
-          src="https://avatars3.githubusercontent.com/u/40247665?s=400&u=f2d4d977e1c152882a5d647df723d76264f60ef0&v=4"
-          height="30px"
-          width="30px"
-        />
+        <div >
+          <img
+            src="https://avatars3.githubusercontent.com/u/40247665?s=400&u=f2d4d977e1c152882a5d647df723d76264f60ef0&v=4"
+            height="40px"
+            width="40px"
+            style={{display: "inline"}}
+          />
+        {/* </div>
+        <div style={{display: "inline"}}> */}
+          {  !isLoggedIn &&
+              <h1 style={{
+              display: "inline",
+              paddingLeft: '1em',
+              fontFamily: 'Apple Chancery, cursive',
+              color: 'black',
+              }}>FELLUMINATI</h1>
+          }
+        </div>
       </Link>
-      {isLoggedIn ? (
+      {isLoggedIn &&  (
         <div style={{display: "inline"}}>
           {/* The navbar will show these links after you log in */}
           <Link id="navTabLinks" to="/reacto">Reactos</Link>
@@ -25,13 +38,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             Logout
           </a>
         </div>
-      ) : (
+      )}
+      { /* : (
         <div style={{display: "inline"}}>
-          {/* The navbar will show these links before you log in */}
-          <Link id="navTabLinks" to="/login">Login</Link>
+          {/* The navbar will show these links before you log in */
+          /*<Link id="navTabLinks" to="/login">Login</Link>
           <Link id="navTabLinks" to="/signup">Sign Up</Link>
         </div>
-      )}
+)     */}
     </nav>
     <Divider horizontal></Divider>
   </div>

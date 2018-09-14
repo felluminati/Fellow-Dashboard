@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const WeekTopic = db.define('week_topic', {
+const Week = db.define('week', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  num: {
+  number: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
 })
 
-module.exports = WeekTopic
+module.exports = Week

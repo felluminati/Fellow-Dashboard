@@ -29,7 +29,7 @@ label {
   display: flex;
   flex-direction: row;
   padding-top: 1em;
-  padding-left: 0.5em;
+  padding-left: 1em;
 }
 
 nav img {
@@ -67,4 +67,14 @@ small {
 
 #reacto-dashboard > h1 {
   font-size: 40px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reacto-markdown {
+  padding: 5%;
 }

@@ -2,6 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
+const axios = require('axios')
 module.exports = router
 
 /**
@@ -31,12 +32,13 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     googleConfig,
     async (token, refreshToken, profile, done) => {
       const googleId = profile.id
-      const name = profile.displayName
       const email = profile.emails[0].value
       const googleToken = token
       const googleRefreshToken = refreshToken
       try{
-        await User.update({name, googleId, googleToken, googleRefreshToken},{
+        // const res = await axios.get('/auth/me');
+        // const user = res.data
+        await User.update({ googleId, googleToken, googleRefreshToken},{
           where: {
             email: email
           }

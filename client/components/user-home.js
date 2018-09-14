@@ -10,7 +10,25 @@ export const UserHome = props => {
   const {email, googleId} = props
   if(googleId) {
     return(
-      <h1>USER DASHBOARD</h1>
+      <div>
+      <h1 style={{
+        display: "inline",
+        paddingLeft: '6em',
+        fontFamily: 'Apple Chancery, cursive',
+        color: 'black',
+        fontSize: '4rem'
+        }}> WELCOME TO FELLUMINATI</h1>
+        <img
+        src="https://media1.tenor.com/images/140294fd47bb57acbe431572da23f7d2/tenor.gif?itemid=5346554"
+        style={{
+          height: "400px",
+          width: "400px",
+          display: 'block',
+          paddingTop: '3em',
+          margin: 'auto'
+        }}
+        />
+      </div>
     )
   } else {
       return (

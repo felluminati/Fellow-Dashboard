@@ -4,18 +4,20 @@ const db = require('../db')
 const Reacto = db.define('reacto', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
-  htmlUrl: {
+  html_url: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  week: {
-    type: Sequelize.INTEGER,
+  download_url: {
+    type: Sequelize.STRING,
     allowNull: false,
-  },
+    unique: true
+  }
 })
+
+Reacto.prototype.fellowLecture = () =>  this.filter(reacto => !isNaN(reacto.name[0]))
 
 module.exports = Reacto

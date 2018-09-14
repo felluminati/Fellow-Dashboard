@@ -1,16 +1,14 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Calendar = db.define('calendar', {
+const CalendarEvent = db.define('calendarevent', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
   },
   startDate: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
+    type: Sequelize.STRING
+  }
 })
 
-module.exports = Calendar
+module.exports = CalendarEvent
