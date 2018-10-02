@@ -6,6 +6,10 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './Auth/auth-form'
+
 export {default as Reacto} from './Reacto/reacto'
-export {default as AllReactos} from './all-reactos'
-export {default as SingleReacto} from './single-reacto'
+export {default as ReactoWeek} from './Reacto/reacto-week'
+export {default as ReactoMarkdown} from './Reacto/reacto-markdown'
+
+export {default as Workshops} from './Workshop/workshops'
+export {default as Grading} from './Grading/grading'

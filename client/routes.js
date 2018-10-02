@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Github, Reacto, AllReactos, SingleReacto} from './components'
+import {Login, Signup, UserHome, Github, Reacto, AllReactos, SingleReacto, Workshops, Grading, ReactoMarkdown} from './components'
 import {me} from './store'
 
 /**
@@ -25,7 +25,10 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/reacto/markdown/:name" component={ReactoMarkdown} />
             <Route path="/reacto" component={Reacto} />
+            <Route path="/workshops" component={Workshops} />
+            <Route path="/grading" component={Grading} />
             <Route component={UserHome} />
           </Switch>
         )}

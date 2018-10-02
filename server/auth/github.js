@@ -2,6 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const GithubStrategy = require('passport-github').Strategy
 const {User} = require('../db/models')
+const axios = require('axios')
 module.exports = router
 
 /**
@@ -30,17 +31,31 @@ if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
 
   const strategy = new GithubStrategy(
     githubConfig,
-    (token, refreshToken, profile, done) => {
+    async (token, refreshToken, profile, done) => {
       const githubId = profile.id
       const email = profile.emails[0].value
-      const githubToken = token
-      const githubRefreshToken = refreshToken
-      User.findOrCreate({
-        where: {githubId},
-        defaults: {email, githubToken, githubRefreshToken}
-      })
-        .then(([user]) => done(null, user))
-        .catch(done)
+      const [firstName, lastName] = profile.displayName.split(' ');
+      try {
+        let res = await axios({
+          url: 'https://api.github.com/repos/FullstackAcademy/technical-interview-prep',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `token ${token}`
+          }
+        })
+        const githubToken = token
+        const githubRefreshToken = refreshToken
+        User.findOrCreate({
+          where: {githubId},
+          defaults: {email, githubToken, githubRefreshToken, firstName, lastName}
+        })
+          .then(([user]) => done(null, user))
+          .catch(done)
+      } catch (err) {
+        err.message = 'Not Authorzied'
+        err.status = 401
+        done(err)
+      }
     }
   )
 

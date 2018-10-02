@@ -12,7 +12,7 @@ const AuthForm = props => {
   return (
     <Segment padded id="auth-form">
       <Form onSubmit={handleSubmit} name={name}>
-        {displayName==="Sign Up" && <Form.Field width="ten">
+        {/* {displayName==="Sign Up" && <Form.Field width="ten">
             <label htmlFor="firstName">
               <small>First Name</small>
             </label>
@@ -35,11 +35,11 @@ const AuthForm = props => {
               <small>Password</small>
             </label>
             <input name="password" type="password" />
-        </Form.Field>
+        </Form.Field> */}
         {error && error.response && <div> {error.response.data} </div>}
         <div className="auth-buttons">
-          <Button primary type="submit">{displayName}</Button>
-          <Divider horizontal>Or</Divider>
+          {/* <Button primary type="submit">{displayName}</Button>
+          <Divider horizontal>Or</Divider> */}
           <a href="/auth/github">
             <Button color="black" type="button" >
               <Icon name="github" />

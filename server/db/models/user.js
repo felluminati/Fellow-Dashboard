@@ -49,6 +49,9 @@ const User = db.define('user', {
   },
   githubRefreshToken: {
     type: Sequelize.STRING
+  },
+  sessionId: {
+    type: Sequelize.STRING
   }
 })
 

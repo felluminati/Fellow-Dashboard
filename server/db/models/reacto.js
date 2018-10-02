@@ -2,21 +2,22 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Reacto = db.define('reacto', {
-  gistLink: {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  html_url: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },
-  replLink: {
+  download_url: {
     type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  dateAssigned: {
-    type: Sequelize.DATE,
     allowNull: false,
     unique: true
   }
 })
+
+Reacto.prototype.fellowLecture = () =>  this.filter(reacto => !isNaN(reacto.name[0]))
 
 module.exports = Reacto

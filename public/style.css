@@ -10,9 +10,31 @@ label {
   display: block;
 }
 
-nav a {
+#colorNavBar {
+  box-shadow: 0.1em 0.1em 0.1em 0.1em silver;
+}
+
+#navTabLinks {
   display: inline-block;
-  margin: 1em;
+  margin: 0.4em 0 1em 1em;
+  font-size: 20px;
+  color: #696969;
+}
+
+#navTabLinks:hover {
+ color: #000000;
+}
+
+#navStyle {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+
+nav img {
+  display: inline-block;
+  margin-top: 0.2em;
 }
 
 form div {
@@ -36,4 +58,23 @@ small {
   width: 70%;
   margin: 2em auto 0 auto;
   text-align: center;
+}
+
+#reacto-dashboard {
+  margin: 0 auto;
+  width: 70%;
+}
+
+#reacto-dashboard > h1 {
+  font-size: 40px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reacto-markdown {
+  padding: 5%;
 }
